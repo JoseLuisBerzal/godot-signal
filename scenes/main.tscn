@@ -1,0 +1,51 @@
+[gd_scene load_steps=4 format=3 uid="uid://d1ia2uo4wkvc3"]
+
+[ext_resource type="Texture2D" uid="uid://bid38d8x04nq2" path="res://images/icon.svg" id="1_jjd04"]
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_ththo"]
+[ext_resource type="PackedScene" uid="uid://cmq2rt8mrnck8" path="res://scenes/timer.tscn" id="2_qj6hs"]
+
+[node name="scn_main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ththo")
+
+[node name="lbl_welcome" type="Label" parent="."]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 8.0
+offset_right = 189.0
+offset_bottom = 62.0
+text = "¡Bienvenido/a!
+GODOT - SIGNAL"
+horizontal_alignment = 1
+
+[node name="btn_pause" type="Button" parent="."]
+layout_mode = 0
+offset_left = 187.0
+offset_top = 12.0
+offset_right = 381.0
+offset_bottom = 58.0
+text = "Pause"
+
+[node name="godot_logo" type="Sprite2D" parent="."]
+position = Vector2(412, 35)
+scale = Vector2(0.265625, 0.28125)
+texture = ExtResource("1_jjd04")
+
+[node name="scn_timer" parent="." instance=ExtResource("2_qj6hs")]
+
+[node name="lbl_timer" parent="scn_timer/timer" index="0"]
+offset_left = 28.0
+offset_top = 62.0
+offset_right = 173.0
+offset_bottom = 100.0
+text = "0"
+
+[connection signal="pressed" from="btn_pause" to="scn_timer" method="_on_btn_pause_pressed"]
+[connection signal="godot_pause" from="scn_timer" to="." method="_on_control_godot_pause"]
+
+[editable path="scn_timer"]
